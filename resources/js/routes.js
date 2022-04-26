@@ -3,7 +3,8 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 //importar los .vue
-
+import PresupuestosEnCurso from './components/PresupuestosEnCurso.vue';
+import PresupuestosAprobados from './components/PresupuestosAprobados.vue';
 
 const router = new VueRouter({
     mode: 'history',
@@ -11,12 +12,12 @@ const router = new VueRouter({
         {
             path: '/presupuestosAprobados',
             name: 'PresupuestosAprobados',
-            component,
+            component: PresupuestosAprobados,
         },
         {
             path: '/presupuestosEnCuros',
             name: 'PresupuestosEnCurso',
-            component,
+            component: PresupuestosEnCurso,
         },
     ]
 });

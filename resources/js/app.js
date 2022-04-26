@@ -6,7 +6,7 @@ import App from './components/App.vue'
 
 window.Vue = require('vue').default;
 
-
+Vue.component('nav-menu', require('./components/NavMenu.vue'));
 
 const app = new Vue({
     el: '#app',
