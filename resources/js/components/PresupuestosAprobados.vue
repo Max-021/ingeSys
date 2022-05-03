@@ -1,4 +1,6 @@
 <template>
+    <div>
+        <nav-menu></nav-menu>
         <div class="content">
             <table>
                 <thead>
@@ -27,6 +29,7 @@
                 </tbody>
             </table>
         </div>
+    </div>
 </template>
 
 <style>
