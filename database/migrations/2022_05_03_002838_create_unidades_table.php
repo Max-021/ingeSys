@@ -17,7 +17,7 @@ class CreateUnidadesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string("nombre",120);
-            $table->string("id-cliente",10);
+            $table->string("id_cliente",10);
         });
     }
 

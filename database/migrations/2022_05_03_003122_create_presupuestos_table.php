@@ -16,10 +16,10 @@ class CreatePresupuestosTable extends Migration
         Schema::create('presupuestos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->date("fecha-creacion");
+            $table->date("fecha_creacion");
             $table->string("nombre", 40);
-            $table->string("nombre-unidad",40);
-            $table->integer("num-presupuesto");
+            $table->string("nombre_unidad",40);
+            $table->integer("num_presupuesto");
             $table->integer("instancia");
             $table->float("importe",10,2);
             $table->date('deleted_at');

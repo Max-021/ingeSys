@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Presupuesto;
 
 class PresupuestoController extends Controller
 {
@@ -13,7 +14,8 @@ class PresupuestoController extends Controller
      */
     public function index()
     {
-        //
+        $presupuestos = Presupuesto::all();
+        return $presupuestos;
     }
 
     /**
@@ -34,7 +36,15 @@ class PresupuestoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $presupuesto = new Presupuesto;
+        $presupuesto->fecha_creacion  = $request->fecha_creacion;
+        $presupuesto->nombre          = $request->nombre;
+        $presupuesto->nombre_unidad   = $request->nombre_unidad;
+        $presupuesto->num_presupuesto = $request->num_presupuesto;
+        $presupuesto->instancia       = $request->instancia;
+        $presupuesto->importe         = $request->importe;
+
+        $presupuesto->save();
     }
 
     /**
@@ -66,9 +76,18 @@ class PresupuestoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $presupuesto = Presupuesto::findOrFail($request->id);
+        $presupuesto->fecha_creacion  = $request->fecha_creacion;
+        $presupuesto->nombre          = $request->nombre;
+        $presupuesto->nombre_unidad   = $request->nombre_unidad;
+        $presupuesto->num_presupuesto = $request->num_presupuesto;
+        $presupuesto->instancia       = $request->instancia;
+        $presupuesto->importe         = $request->importe;
+
+        $presupuesto->save();
+        return $presupuesto;
     }
 
     /**
@@ -77,8 +96,9 @@ class PresupuestoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $presupuesto = Presupuesto::destroy($request->id);
+        return $presupuesto;
     }
 }

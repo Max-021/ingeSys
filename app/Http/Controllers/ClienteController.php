@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Cliente;
 
 class ClienteController extends Controller
 {
@@ -13,7 +14,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        $clientes = Cliente::all();
+        return $clientes;
     }
 
     /**
@@ -34,7 +36,11 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cliente = new Cliente;
+        $cliente->nombre      = $request->nombre;
+        $cliente->razo_social = $request->razon_social;
+
+        $cliente->save();
     }
 
     /**
@@ -66,9 +72,14 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $cliente = Cliente::findOrFail($request->id);
+        $cliente->nombre      = $request->nombre;
+        $cliente->razo_social = $request->razon_social;
+
+        $cliente->save();
+        return $cliente;
     }
 
     /**
@@ -77,8 +88,9 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $cliente = Cliente::destroy($request->id);
+        return $cliente;
     }
 }

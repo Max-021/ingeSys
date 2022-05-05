@@ -17,7 +17,7 @@ class CreateClientesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string("nombre",120);
-            $table->string("razon-social",20);
+            $table->string("razon_social",20);
         });
     }
 

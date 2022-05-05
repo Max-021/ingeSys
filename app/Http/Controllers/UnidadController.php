@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Unidad;
 
 class UnidadController extends Controller
 {
@@ -13,7 +14,8 @@ class UnidadController extends Controller
      */
     public function index()
     {
-        //
+        $unidades = Unidad::all();
+        return $unidades;
     }
 
     /**
@@ -34,7 +36,11 @@ class UnidadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $unidad = new Unidad;
+        $unidad->nombre     = $request->nombre;
+        $unidad->id_cliente = $request->id_cliente;
+
+        $unidad->save();
     }
 
     /**
@@ -66,9 +72,14 @@ class UnidadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $unidad = Unidad::findOrFail($request->id);
+        $unidad->nombre     = $request->nombre;
+        $unidad->id_cliente = $request->id_cliente;
+
+        $unidad->save();
+        return $unidad;
     }
 
     /**
@@ -77,8 +88,9 @@ class UnidadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $unidad = Unidad::destroy($request->id);
+        return $unidad;
     }
 }
