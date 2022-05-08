@@ -14,15 +14,15 @@
                 </thead>
                 <tbody>
                     <tr v-for="(datos, index) in infoPresup" :key="index">
-                        <td>{{datos.fechaCreacion}}</td>
-                        <td>{{datos.nomClient}}</td>
-                        <td>{{datos.nomUnit}}</td>
-                        <td>{{datos.numPresup}}</td>
+                        <td>{{datos.created_at}}</td>
+                        <td>{{datos.nombre}}</td>
+                        <td>{{datos.nombre_unidad}}</td>
+                        <td>{{datos.num_presupuesto}}</td>
                         <td>
                             <div class="actions">
-                                <button class="button-green button-check" @click="mandarAParaPresupuestar(trabajo)"></button>
-                                <button class="button-blue button-edit" data-toggle="modal" data-target="#myModal" type="button" @click="trabajoParaEditar = trabajo"></button>
-                                <button class="button-red button-delete" @click="deleteTrabajo(trabajo)"></button>
+                                <button class="button approve" @click="mandarAParaPresupuestar(datos)">Aprobar</button>
+                                <button class="button edit" data-toggle="modal" data-target="#myModal" type="button" @click="trabajoParaEditar = trabajo">Editar</button>
+                                <button class="button delete" @click="deleteTrabajo(datos)">Borrar</button>
                             </div>
                         </td>
                     </tr>
@@ -33,7 +33,10 @@
 </template>
 
 <style>
-    
+    .button {}
+    .approve {}
+    .edit {}
+    .delete {}
 </style>
 
 <script>
@@ -44,11 +47,31 @@ export default {
         }
     },
     methods: {
-        mandarAparaPresupuestar(trabajo) {
-            //cargar en la api con laravel los datos
-        },
-        deleteTrabajo(trabajo) {
+        async pedirInfo() {
+            try {
+                let datos = await httpClient.get(this.$api+'presupuestos/1');
+                this.infoPresup = datos.data;
+            } catch (error) {
+                console.log(error);
+            }
 
+        },
+        async mandarAparaPresupuestar(datos) {
+            try {
+                //cambiar acá la instancia
+                let info = await httpClient.put(this.$api+`presupuestos/${datos}`);
+                console.log("Datos con cambio de instancia: " + info);
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async deleteTrabajo(datos) {
+            try {
+                let info = await httpClient.delete(this.$api+`presupuestos/${datos}`);
+                console.log("Datos borrados:" + info);
+            } catch (error) {
+                console.log(error);
+            }
         }//falta el de editar trabajo
     }
 }

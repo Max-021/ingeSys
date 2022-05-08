@@ -29,7 +29,7 @@ Route::post('/unidades', 'App\Http\Controller\UnidadController@store');
 Route::put('/unidades/{id}', 'App\Http\Controller\UnidadController@update');
 Route::delete('/unidades/{id}', 'App\Http\Controller\UnidadController@destroy');
 
-Route::get('/presupuestos', 'App\Http\Controller\PresupuestoController@index');
+Route::get('/presupuestos/{instancia}', 'App\Http\Controller\PresupuestoController@all');
 Route::post('/presupuestos', 'App\Http\Controller\PresupuestoController@store');
 Route::put('/presupuestos/{id}', 'App\Http\Controller\PresupuestoController@update');
 Route::delete('/presupuestos/{id}', 'App\Http\Controller\PresupuestoController@destroy');
