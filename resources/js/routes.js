@@ -15,11 +15,11 @@ const router = new VueRouter({
             component: PresupuestosAprobados,
         },
         {
-            path: '/presupuestosEnCuros',
+            path: '/presupuestosEnCurso',
             name: 'PresupuestosEnCurso',
             component: PresupuestosEnCurso,
         },
     ]
 });
 
-export default router
+export default router;

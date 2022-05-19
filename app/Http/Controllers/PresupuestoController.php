@@ -15,7 +15,7 @@ class PresupuestoController extends Controller
      */
     public function all($instancia)
     {
-        $presupuestos = DB::table('presupuestos')->where([['instancia', '=', $instancia], ['deleted_at', '=', NULL]])->orderBy('created_at')->get();
+        $presupuestos = DB::table('presupuestos')->where([['instancia', '=', $instancia]])->orderBy('created_at')->get();
         return $presupuestos;
     }
 

@@ -29,10 +29,21 @@
                 </tbody>
             </table>
         </div>
+        <b-button v-b-modal.modal-1 class="crear-presup">Crear presupuesto</b-button>
+
+        <b-modal id="modal-1" title="BootstrapVue">
+            <p class="my-4">Hello from modal!</p>
+        </b-modal>
     </div>
 </template>
 
 <style>
+.crear-presup {
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    z-index: 2;
+}
     .button {}
     .approve {}
     .edit {}
@@ -40,17 +51,25 @@
 </style>
 
 <script>
+import NavMenu from './NavMenu.vue';
+import {httpClient} from '../httpClient';
 export default {
+  components: { NavMenu },
     data: function() {
         return {
             infoPresup: [] //Acá deberia ir la info para la tabla con axios o algo parecido
         }
+    },
+    created: function() {
+        this.pedirInfo()
     },
     methods: {
         async pedirInfo() {
             try {
                 let datos = await httpClient.get(this.$api+'presupuestos/1');
                 this.infoPresup = datos.data;
+                console.log("Info del dato abajo");
+                console.log(datos);
             } catch (error) {
                 console.log(error);
             }

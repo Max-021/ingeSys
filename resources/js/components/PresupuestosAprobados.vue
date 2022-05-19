@@ -20,7 +20,7 @@
                         <td>{{datos.num_presupuesto}}</td>
                         <td>
                             <div class="actions">
-                                <button class="button approve" @click="Archivar(datos)">Aprobar</button>
+                                <button class="button approve" @click="archivar(datos)">Aprobar</button>
                                 <button class="button edit" data-toggle="modal" data-target="#myModal" type="button" @click="trabajoParaEditar = trabajo">Editar</button>
                                 <button class="button delete" @click="deleteTrabajo(datos)">Borrar</button>
                                 <button class="button change" @click="cambiarInstancia(datos)">Retroceder</button>
@@ -42,10 +42,12 @@
 </style>
 
 <script>
+
 export default {
     data: function() {
         return {
             infoPresup: [] //Acá deberia ir la info para la tabla con axios o algo parecido
+
         }
     },
     methods: {
@@ -58,7 +60,7 @@ export default {
             }
 
         },
-        async Archivar(datos) {
+        async archivar(datos) {
             try {
                 //cambiar acá la instancia a  un 3 ficticio para que queden "archivados"
                 let info = await httpClient.put(this.$api+`presupuestos/${datos}`);

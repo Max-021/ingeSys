@@ -3,10 +3,10 @@
         <div class="main-title">IngeSystem</div>
         <ul class="menu">
             <li class="menuEl">
-                <router-link :to="{name:'PresupuestosAprobados'}"></router-link>
+                <router-link :to="{name:'PresupuestosAprobados'}">Presupuestos aprobados</router-link>
             </li>
             <li class="menuEl">
-                <router-link :to="{name:'PresupuestosEnCurso'}"></router-link>
+                <router-link :to="{name:'PresupuestosEnCurso'}">Presupuestos en curso</router-link>
             </li>
         </ul>
     </nav>
@@ -17,6 +17,7 @@ nav {
     position: fixed;
     height: 48px;
     width: 100%;
+    top: 0;
     z-index: 2;
     display: flex;
     flex-direction: row;
