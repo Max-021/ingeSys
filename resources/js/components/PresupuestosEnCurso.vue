@@ -25,7 +25,7 @@
                                 <b-button variant="success" @click="aprobar(datos)">
                                     <b-icon icon="check-square"></b-icon>
                                 </b-button>
-                                <b-button variant="warning" @click="toggleModalEditar(); presupuestoAEditar=datos">
+                                <b-button v-b-modal.modal-1 variant="warning" @click="toggleModalEditar(); presupuestoAEditar=datos">
                                     <b-icon icon="pencil"></b-icon>
                                 </b-button>
                                 <b-button variant="danger" @click="deleteTrabajo(datos)">
@@ -37,12 +37,11 @@
                 </tbody>
             </table>
         </div>
-        <!-- aca copiar v-b-modal.modal-1 y pegarlo en el boton de editar para ver si activar el modal con el formulario de edicion -->
         <b-button v-b-modal.modal-1 class="crear-presup" @click="toggleModalCrear()">Crear presupuesto</b-button>
 
         <b-modal id="modal-1" title="Presupuestos">
             <nuevo-presup v-if="modalCrear"></nuevo-presup>
-            <edit-presup v-if="modalEditar" :paraEditar="presupuestoAEditar"></edit-presup>
+            <edit-presup v-if="modalEditar" :presupuestoAEditar="presupuestoAEditar"></edit-presup>
         </b-modal>
     </div>
 </template>
@@ -64,7 +63,7 @@ import axios from 'axios';
 export default {
     data: function() {
         return {
-            infoPresup: [], //Acá deberia ir la info para la tabla con axios o algo parecido
+            infoPresup: [],
             modalCrear: false,
             modalEditar: false,
             presupuestoAEditar: ''
@@ -86,8 +85,6 @@ export default {
             try {
                 let datos = await axios.get(this.$api+'presupuestos/1');
                 this.infoPresup = datos.data;
-                console.log("Info del dato abajo");
-                console.log(datos.data);
             } catch (error) {
                 console.log(error);
             }
@@ -95,8 +92,11 @@ export default {
         },
         async aprobar(datos) {
             try {
-                //cambiar acá la instanciacambiarInstancia
-                let info = await axios.put(this.$api+`presupuestos/cambiarInstancia/${datos.id}/2`);
+                let datosPresup = {
+                    id: datos.id,
+                    instancia: 2
+                }
+                let info = await axios.put(this.$api+`presupuestos/aprobar`,datosPresup);
                 console.log("Datos con cambio de instancia: " + info);
             } catch (error) {
                 console.log(error);
@@ -109,7 +109,7 @@ export default {
             } catch (error) {
                 console.log(error);
             }
-        }//falta el de editar trabajo
+        }
     }
 }
 </script>

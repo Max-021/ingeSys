@@ -17,9 +17,11 @@ window.Vue = require('vue').default;
 
 import navMenu from './components/NavMenu.vue';
 import nuevoPresup from './components/nuevoPresup.vue';
+import editarPresup from './components/editarPresup.vue';
 
 Vue.component('nav-menu', navMenu);
 Vue.component('nuevo-presup', nuevoPresup);
+Vue.component('edit-presup', editarPresup);
 
 const app = new Vue({
     el: '#app',

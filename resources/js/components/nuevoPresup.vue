@@ -6,11 +6,11 @@
           </b-form-group>
           <b-form-group id="input-group-2" label="Cliente" label-for="input-2" >
               <!-- dropdown clientes -->
-              <b-form-input id="input-2" type="" v-model="form.cliente" required></b-form-input>
+              <b-form-select id="input-2" v-model="form.cliente" :options="clientes" required></b-form-select>
           </b-form-group>
           <b-form-group id="input-group-3" label="Unidad" label-for="input-3" >
               <!-- dropdown con unidades -->
-              <b-form-input id="input-3" type="" v-model="form.unidad" required></b-form-input>
+              <b-form-select id="input-3"  v-model="form.unidad" :options="unidades" required></b-form-select>
           </b-form-group>
           <b-form-group id="input-group-4" label="Número presupuesto" label-for="input-4" >
               <b-form-input id="input-4" type="text" v-model="form.presupuesto" required></b-form-input>
@@ -30,8 +30,8 @@ export default {
         return {
             form: {
                 fecha: '',
-                cliente: '',
-                unidad: '',
+                cliente: null,
+                unidad: null,
                 presupuesto: 0,
                 importe: 0,
             },
@@ -39,20 +39,31 @@ export default {
             unidades: [],
         }
     },
-    created: async function() {
-        try {
-            let infoClientes = axios.get(this.$api+'clientes');
-            let infoUnidades = axios.get(this.$api+'unidades');
-            this.clientes = infoClientes.data;
-            this.unidades = infoUnidades.data;
-            console.log(clientes);
-            console.log(unidades);
-            
-        } catch (error) {
-            
-        }
+    created: function() {
+        this.pedirClientesUnidades();
     },
     methods: {
+        async pedirClientesUnidades() {
+            try {
+                let infoClientes = axios.get(this.$api+'clientes');
+                let infoUnidades = axios.get(this.$api+'unidades');
+                this.clientes = [...infoClientes.data.nombre];
+                this.unidades = [infoUnidades.data.nombre];
+                // esto filtra los nombres para que el form.select funcione bien
+                this.clientes = this.clientes.map(function(cliente) {
+                    return cliente.nombre;
+                });
+                this.unidades = this.unidades.map(function(unidad) {
+                    return unidad.nombre;
+                })
+                console.log(infoClientes);
+                console.log(this.clientes);
+                console.log(this.unidades);
+                
+            } catch (error) {
+                console.log(error);
+            }
+        },
         async crearPresup() {
             try {
                 const nuevoPresupuesto = {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Unidad;
+use Illuminate\Support\Facades\DB;
 
 class UnidadController extends Controller
 {
@@ -14,7 +15,7 @@ class UnidadController extends Controller
      */
     public function index()
     {
-        $unidades = Unidad::all();
+        $unidades = DB::table('unidades')->get();
         return $unidades;
     }
 

@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class PresupuestoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
+    /* Display a listing of the resource.
      * @return \Illuminate\Http\Response
      */
     public function all($instancia)
@@ -84,9 +82,9 @@ class PresupuestoController extends Controller
         return $presupuesto;
     }
 
-    public function cambiarInstancia($id, $instancia) {
-        $presupuesto = Presupuesto::findOrFail($id);
-        $presupuesto->$instancia = $instancia;
+    public function cambiarInstancia(Request $request) {
+        $presupuesto = Presupuesto::findOrFail($request->$id);
+        $presupuesto->$instancia = $request->$instancia;
         $presupuesto->save();
         return $presupuesto;
     }
