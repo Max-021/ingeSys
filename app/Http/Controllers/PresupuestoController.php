@@ -15,7 +15,7 @@ class PresupuestoController extends Controller
      */
     public function all($instancia)
     {
-        $presupuestos = DB::table('presupuestos')->where([['instancia', '=', $instancia]])->orderBy('created_at')->get();
+        $presupuestos = DB::table('presupuestos')->where([['instancia', '=', $instancia]])->get();
         return $presupuestos;
     }
 
@@ -81,6 +81,13 @@ class PresupuestoController extends Controller
     public function destroy(Request $request)
     {
         $presupuesto = Presupuesto::destroy($request->id);
+        return $presupuesto;
+    }
+
+    public function cambiarInstancia($id, $instancia) {
+        $presupuesto = Presupuesto::findOrFail($id);
+        $presupuesto->$instancia = $instancia;
+        $presupuesto->save();
         return $presupuesto;
     }
 }
