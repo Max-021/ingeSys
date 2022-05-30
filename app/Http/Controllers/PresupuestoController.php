@@ -83,8 +83,10 @@ class PresupuestoController extends Controller
     }
 
     public function cambiarInstancia(Request $request) {
-        $presupuesto = Presupuesto::findOrFail($request->$id);
-        $presupuesto->$instancia = $request->$instancia;
+
+        //reemplacé el find con esto tomado del metodo all
+        $presupuesto = DB::table('presupuestos')->where('id', '=', $request->id)->get();
+        $presupuesto->instancia = $request->instancia;
         $presupuesto->save();
         return $presupuesto;
     }

@@ -21,5 +21,5 @@ Route::delete('/unidades/{id}',                                 'App\Http\Contro
 Route::get('/presupuestos/{instancia}',                         'App\Http\Controllers\PresupuestoController@all');
 Route::post('/presupuestos',                                    'App\Http\Controllers\PresupuestoController@store');
 Route::put('/presupuestos/{id}',                                'App\Http\Controllers\PresupuestoController@update');
-Route::put('/presupuestos/aprobar',                             'App\Http\Controllers\PresupuestoController@cambiarInstancia');
+Route::put('/presupuestos/aprobar',                           'App\Http\Controllers\PresupuestoController@cambiarInstancia');
 Route::delete('/presupuestos/{id}',                             'App\Http\Controllers\PresupuestoController@destroy');
